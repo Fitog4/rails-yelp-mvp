@@ -1,15 +1,23 @@
-<h1><%= @restaurant.name %></h1>
+<div class="container">
+  <h1><%= @restaurant.name %></h1>
 
-<p>Address: <%= @restaurant.address %></p>
-<p>Category: <%= @restaurant.category %></p>
-<p>Phone number: <%= @restaurant.phone_number %></p>
-<%= link_to 'Leave a review!', new_restaurant_review_path(@restaurant) %>
-<br>
-<%= link_to 'Back to restaurants', restaurants_path %>
+  <p>Address: <%= @restaurant.address %></p>
+  <p>Category: <%= @restaurant.category %></p>
+  <p>Phone number: <%= @restaurant.phone_number %></p>
 
-<!-- reviews -->
-<h2>Restaurant reviews</h2>
+  <%= link_to 'Back to restaurants', restaurants_path %>
 
-<% @restaurant.reviews.each do |review| %>
-  <p><%= review.rating %>/5. <%= review.content %></p>
-<% end %>
+  <div class="row">
+    <div class="col-xs-6">
+      <h2>Restaurant reviews</h2>
+
+      <% @restaurant.reviews.each do |review| %>
+      <p><%= review.rating %>/5. <%= review.content %></p>
+      <% end %>
+    </div>
+    <div class="col-xs-6">
+      <h2>Leave a review!</h2>
+      <%= render 'reviews/form', restaurant: @restaurant, review: Review.new(restaurant: @restaurant) %>
+    </div>
+  </div>
+</div>

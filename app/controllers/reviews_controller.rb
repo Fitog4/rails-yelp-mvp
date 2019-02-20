@@ -1,10 +1,6 @@
 class ReviewsController < ApplicationController
   before_action :set_restaurant, only: [:new, :create]
 
-  def new
-    @review = Review.new(restaurant: @restaurant)
-  end
-
   def create
     Review.create(content: review_params[:content], rating: review_params[:rating], restaurant: @restaurant)
     redirect_to restaurant_path(@restaurant)
